@@ -1,9 +1,12 @@
 {
   "name": "@point-hub/papi-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Papi CLI is a command line interface tool that helps you to initialize, develop, and maintain your Papi applications",
   "type": "module",
   "main": "lib/index.js",
+  "bin": {
+    "papi": "./bin/papi.js"
+  },
   "files": [
     "lib/"
   ],

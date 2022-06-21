@@ -5,7 +5,7 @@ The Papi CLI is a command line interface tool that helps you to initialize, deve
 ## Installation
 
 ```bash
-npm install -g @point-hub/papi
+npm install -g @point-hub/papi-cli
 ```
 
 ## Usage
