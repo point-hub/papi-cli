@@ -1,0 +1,14 @@
+# build coverage
+coverage
+
+# build 
+lib
+
+# auto generate npm
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# stub file
+src/stub

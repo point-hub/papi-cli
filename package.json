@@ -1,0 +1,59 @@
+{
+  "name": "@point-hub/papi-cli",
+  "version": "0.0.1",
+  "description": "Papi CLI is a command line interface tool that helps you to initialize, develop, and maintain your Papi applications",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "dev:compile": "tsc -w --project tsconfig.build.json",
+    "dev:resolve-path": "tsc-alias -w --project tsconfig.build.json",
+    "dev": "shx rm -r lib && concurrently -k npm:dev:*",
+    "build:compile": "tsc --project tsconfig.build.json",
+    "build:resolve-path": "tsc-alias --project tsconfig.build.json",
+    "build:copy-stub": "shx cp -r ./src/stub ./lib",
+    "build": "shx rm -r lib && npm run build:compile && npm run build:resolve-path && npm run build:copy-stub",
+    "lint": "eslint ./src/**/*.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+    "test:coverage": "shx rm -r coverage && npm run test -- --coverage"
+  },
+  "keywords": [
+    "papi",
+    "cli",
+    "express",
+    "api"
+  ],
+  "author": "Martien Dermawan Tanama <martiendt@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/point-hub/papi-cli.git"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/inquirer": "^8.2.1",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^17.0.31",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "concurrently": "^7.2.2",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "shx": "^0.3.4",
+    "ts-jest": "^28.0.2",
+    "tsc-alias": "^1.6.11",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "@point-hub/express-cli": "^0.0.7",
+    "@point-hub/express-utils": "^0.0.6",
+    "chalk": "^5.0.1",
+    "inquirer": "^9.0.0"
+  }
+}
