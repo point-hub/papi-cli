@@ -1,51 +1,53 @@
 import fs from "fs";
 import path from "path";
-import { BaseCommand, IAttribute } from "@point-hub/express-cli";
+import { BaseCommand, Color } from "@point-hub/express-cli";
 import { fileExists, fileCopy } from "@point-hub/express-utils";
-import chalk from "chalk";
 import { stubDir, packageNameValid } from "../helper.js";
 
 export class CreateCommand extends BaseCommand {
-  attribute(): IAttribute {
-    return {
+  constructor() {
+    super({
       name: "create",
       description: "Create new API Project",
       summary: "create new api project",
       arguments: [
         {
-          name: "<name>",
-          description: "project name",
+          name: "name",
+          description: "Name of the project",
         },
       ],
       options: [],
-    };
+    });
   }
-  async handle(name: string): Promise<void> {
+  async handle(): Promise<void> {
     if (!packageNameValid) {
       console.error(
-        chalk.red(
+        Color.red(
           `The name of the package does not match the pattern of "^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$"`
         )
       );
       return;
     }
 
-    const dir = `${name}`;
+    const dir = `${this.args.name}`;
 
     if (fileExists(`${dir}`)) {
-      console.error(chalk.red(`Directory "${dir}" is exists!`));
+      console.error(Color.red(`Directory "${dir}" is exists!`));
       return;
     }
 
     fileCopy(path.resolve(stubDir, "./papi"), dir);
-    const stub = fs.readFileSync(path.resolve(stubDir, "./papi/package.json")).toString().replace("package-name", name);
+    const stub = fs
+      .readFileSync(path.resolve(stubDir, "./papi/package.json"))
+      .toString()
+      .replace("package-name", this.args.name);
     fs.writeFileSync(`${dir}/package.json`, stub);
 
-    console.info(`Successfully created project ${chalk.green(name)}`);
+    console.info(`Successfully created project ${Color.green(this.args.name)}`);
     console.info(`Get started with the following commands:`);
     console.info();
-    console.info(`${chalk.gray("$ cd " + dir)}`);
-    console.info(`${chalk.gray("$ npm install")}`);
-    console.info(`${chalk.gray("$ npm run build")}`);
+    console.info(`${Color.gray("$ cd " + dir)}`);
+    console.info(`${Color.gray("$ npm install")}`);
+    console.info(`${Color.gray("$ npm run build")}`);
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@point-hub/papi-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Papi CLI is a command line interface tool that helps you to initialize, develop, and maintain your Papi applications",
   "type": "module",
   "main": "lib/index.js",
@@ -13,11 +13,11 @@
   "scripts": {
     "dev:compile": "tsc -w --project tsconfig.build.json",
     "dev:resolve-path": "tsc-alias -w --project tsconfig.build.json",
-    "dev": "shx rm -r lib && concurrently -k npm:dev:*",
+    "dev": "shx rm -rf lib && concurrently -k npm:dev:*",
     "build:compile": "tsc --project tsconfig.build.json",
     "build:resolve-path": "tsc-alias --project tsconfig.build.json",
     "build:copy-stub": "shx cp -r ./src/stub ./lib",
-    "build": "shx rm -r lib && npm run build:compile && npm run build:resolve-path && npm run build:copy-stub",
+    "build": "shx rm -rf lib && npm run build:compile && npm run build:resolve-path && npm run build:copy-stub",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
@@ -54,9 +54,7 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
-    "@point-hub/express-cli": "^0.0.7",
-    "@point-hub/express-utils": "^0.0.6",
-    "chalk": "^5.0.1",
-    "inquirer": "^9.0.0"
+    "@point-hub/express-cli": "^0.1.1",
+    "@point-hub/express-utils": "^0.0.6"
   }
 }
